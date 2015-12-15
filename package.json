@@ -4,7 +4,8 @@
   "description": "",
   "author": "SkillSync",
   "scripts": {
-    "clean": "rimraf \"build/*\"",
+    "clean": "rimraf \"build/*\" && rimraf \"dist/*\"",
+    "dist": "npm run clean && gulp dist",
     "start": "nodemon src/index.js --watch src"
   },
   "dependencies": {
@@ -12,7 +13,13 @@
     "moment": "^2.10.6"
   },
   "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-zip": "^3.0.2",
+    "moment": "^2.10.6",
     "nodemon": "^1.7.2",
-    "rimraf": "^2.4.3"
+    "rimraf": "^2.4.3",
+    "run-sequence": "^1.1.5",
+    "sync-exec": "^0.6.2"
   }
 }
