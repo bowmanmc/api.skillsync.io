@@ -3,6 +3,7 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+const config = require('./config');
 const Hapi = require('hapi');
 
 // Create a server with a host and port
@@ -15,7 +16,7 @@ const server = new Hapi.Server({
 });
 
 server.connection({ 
-    port: 8000 
+    port: config.port 
 });
 
 // Add the routes

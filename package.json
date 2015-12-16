@@ -6,16 +6,22 @@
   "scripts": {
     "clean": "rimraf \"build/*\" && rimraf \"dist/*\"",
     "dist": "npm run clean && gulp dist",
-    "start": "nodemon src/index.js --watch src"
+    "start": "nodemon src/index.js --watch src",
+    "test": "jasmine"
   },
   "dependencies": {
     "hapi": "^11.1.2",
-    "moment": "^2.10.6"
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "mongoose": "^4.3.1"
   },
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-zip": "^3.0.2",
+    "jasmine": "^2.4.1",
+    "jasmine-node": "^1.14.5",
+    "mockgoose": "^5.0.10",
     "moment": "^2.10.6",
     "nodemon": "^1.7.2",
     "rimraf": "^2.4.3",
