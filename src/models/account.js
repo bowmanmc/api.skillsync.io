@@ -6,35 +6,35 @@ var mongoose = require('mongoose');
  * Account
  * Main user object we'll pass around. Stores a users basic information.
  */
-function Account() {
-
-    var schema = new mongoose.Schema({
-        name: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true,
-            index: {
-                unique: true 
-            }
-        },
-        status: {
-            type: String,
-            default: 'NEW'
-            // NEW, VERIFIED, EXPIRED
-        },
-        created: {
-            type: Date, default: Date.now 
-        },
-        updated: {
-            type: Date, default: Date.now 
+var schema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        index: {
+            unique: true 
         }
-    });
+    },
+    status: {
+        type: String,
+        default: 'NEW'
+        // NEW, VERIFIED, EXPIRED
+    },
+    created: {
+        type: Date,
+        default: Date.now 
+    },
+    updated: {
+        type: Date,
+        default: Date.now 
+    }
+});
+schema.statics.findByEmail = function(email, callback) {
+    return this.findOne({ 'email': email }, callback);
+};
 
-    var model = mongoose.model('account', schema);
-    return model;
-}
-
-module.exports = Account;
+// export the model
+module.exports = mongoose.model('Account', schema);

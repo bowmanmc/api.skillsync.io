@@ -1,45 +1,69 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var mockgoose = require('mockgoose');
+var Account = require('../../src/models/account');
+var accountFixture = require('../fixtures/account.json');
 
-var Account = require('../../src/models/account')();
-// var config = require('../../src/config');
+var config = require('../config');
+config.connect2mongo();
+
 
 describe('Account', function() {
 
     beforeEach(function() {
-        mockgoose(mongoose);
-        mongoose.connect('');
-        // mongoose.connect(config.mongo);
+        // Make sure the collection is empty
+        Account.remove({}, function(err) {
+            if (err) {
+                console.log('Error dropping account collection!', err);
+            }
+        });
     });
 
-    afterEach(function(done) {
-        // drop collections
-        mongoose.connection.db.listCollections().toArray(function(err, names) {
+    afterEach(function() {
+        // Clean up after ourselves
+        Account.remove({}, function(err) {
             if (err) {
-                console.log(err);
-                done();
-            }
-            else {
-                names.forEach(function(c) {
-                    mongoose.connection.db.dropCollection(c.name);
-                    console.log('dropping collection: ' + c.name);
-                });
-                done();
+                console.log('Error dropping account collection!', err);
             }
         });
     });
 
     it('can create an account', function(done) {
-        var accountFixture = require('../fixtures/account.json');
-        var testUser = new Account(accountFixture);
-
-        testUser.save(function() {
-            expect(testUser._id).not.toBe(null);
-            expect(testUser.created).not.toBe(null);
-            expect(testUser.updated).not.toBe(null);
+        var testAccount = new Account(accountFixture);
+        testAccount.save(function() {
+            expect(testAccount._id).not.toBe(null);
+            expect(testAccount.created).not.toBe(null);
+            expect(testAccount.updated).not.toBe(null);
             done();
+        });
+    });
+    
+    it('should return null for bad ids', function(done) {
+        // Accounts should be empty...
+        Account.findById('51bb793aca2ab77a3200000d', function(err, result) {
+            expect(result).toBe(null);
+            done();
+        });
+    });
+    
+    it('can lookup users by email', function(done) {
+        var testAccount = new Account(accountFixture);
+        testAccount.save(function() {
+            Account.findByEmail(testAccount.email, function(err, result) {
+                expect(result).not.toBe(null);
+                expect(result.email).toBe(testAccount.email);
+                done();
+            });
+        });
+    });
+    
+    it('can lookup users by id', function(done) {
+        var testAccount = new Account(accountFixture);
+        testAccount.save(function() {
+            Account.findById('' + testAccount._id, function(err, result) {
+                expect(result).not.toBe(null);
+                expect(result.email).toBe(testAccount.email);
+                done();
+            });
         });
     });
 
