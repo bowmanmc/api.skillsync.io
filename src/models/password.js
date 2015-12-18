@@ -1,6 +1,8 @@
 'use strict';
 
+var bcrypt = require('bcrypt');
 var mongoose = require('mongoose');
+
 
 /**
  * Password
@@ -27,5 +29,28 @@ var schema = new mongoose.Schema({
         default: Date.now 
     }
 });
+
+schema.pre('save', function(next) {
+    var pw = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!pw.isModified('password')){
+        return next();
+    }
+
+    var hash = bcrypt.hashSync(pw.password, 10);
+    pw.password = hash;
+    next();
+});
+
+schema.statics.authenticate = function(userId, candidate, callback) {
+    this.findOne({userId: userId}, function(err, pw) {
+        var result = false;
+        if (pw !== null) {
+            result = bcrypt.compareSync(candidate, pw.password);
+        }
+        callback(result);
+    });
+};
 
 module.exports = mongoose.model('Password', schema);

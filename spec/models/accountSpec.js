@@ -3,9 +3,6 @@
 var Account = require('../../src/models/account');
 var accountFixture = require('../fixtures/account.json');
 
-var config = require('../config');
-config.connect2mongo();
-
 
 describe('Account', function() {
 

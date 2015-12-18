@@ -10,6 +10,7 @@
     "test": "jasmine"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "hapi": "^11.1.2",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
