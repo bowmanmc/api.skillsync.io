@@ -43,8 +43,14 @@ schema.pre('save', function(next) {
     next();
 });
 
-schema.statics.authenticate = function(userId, candidate, callback) {
+schema.statics.findByUserId = function(userId, callback) {
     this.findOne({userId: userId}, function(err, pw) {
+        callback(err, pw);
+    });
+};
+
+schema.statics.authenticate = function(userId, candidate, callback) {
+    this.findByUserId(userId, function(err, pw) {
         var result = false;
         if (pw !== null) {
             result = bcrypt.compareSync(candidate, pw.password);
