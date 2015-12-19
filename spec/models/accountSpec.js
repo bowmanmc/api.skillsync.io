@@ -1,6 +1,6 @@
 'use strict';
 
-var Account = require('../../src/models/account');
+var Account = require('../../src/modules/account/Account');
 
 
 describe('Account', function() {

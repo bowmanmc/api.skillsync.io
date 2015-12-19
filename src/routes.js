@@ -1,9 +1,5 @@
 'use strict';
 
-var hello = require('./handlers/hello');
+var api = require('./modules/api/routes');
 
-module.exports = [{
-    method: 'GET',
-    path: '/hello',
-    handler: hello
-}];
+module.exports = api;
