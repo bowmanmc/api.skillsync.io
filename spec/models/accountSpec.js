@@ -1,10 +1,16 @@
 'use strict';
 
 var Account = require('../../src/models/account');
-var accountFixture = require('../fixtures/account.json');
 
 
 describe('Account', function() {
+
+    var testFixture = {
+        'name': 'Jerome Horwitz',
+        'email': 'jhorwitz@skillsync.io',
+        'password': 'curly',
+        'status': 'VERIFIED'
+    };
 
     beforeEach(function() {
         // Make sure the collection is empty
@@ -25,7 +31,7 @@ describe('Account', function() {
     });
 
     it('can create an account', function(done) {
-        var testAccount = new Account(accountFixture);
+        var testAccount = new Account(testFixture);
         testAccount.save(function() {
             expect(testAccount._id).not.toBe(null);
             expect(testAccount.created).not.toBe(null);
@@ -43,7 +49,7 @@ describe('Account', function() {
     });
     
     it('can lookup users by email', function(done) {
-        var testAccount = new Account(accountFixture);
+        var testAccount = new Account(testFixture);
         testAccount.save(function() {
             Account.findByEmail(testAccount.email, function(err, result) {
                 expect(result).not.toBe(null);
@@ -54,7 +60,7 @@ describe('Account', function() {
     });
     
     it('can lookup users by id', function(done) {
-        var testAccount = new Account(accountFixture);
+        var testAccount = new Account(testFixture);
         testAccount.save(function() {
             Account.findById('' + testAccount._id, function(err, result) {
                 expect(result).not.toBe(null);
