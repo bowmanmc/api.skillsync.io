@@ -3,12 +3,12 @@
 /**
  * Test for modules/account/handlers.js #isRegistered
  */
-var Account = require('../../../src/modules/account/Account');
-var accountFixture = require('./accountFixture');
-var handlers = require('../../../src/modules/account/handlers');
+var Account = require('../../../../src/modules/account/Account');
+var accountFixture = require('../accountFixture');
+var handlers = require('../../../../src/modules/account/handlers');
 
 
-describe('Account Handlers isRegistered', function() {
+describe('Account Handler - isRegistered', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
