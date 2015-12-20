@@ -13,6 +13,7 @@
   "dependencies": {
     "bcrypt": "^0.8.5",
     "hapi": "^11.1.2",
+    "joi": "^7.0.1",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "mongoose": "^4.3.1"

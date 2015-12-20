@@ -12,6 +12,9 @@ var Password = require('../Password');
 module.exports = function(request, reply) {
 
     // Validate the request
+    var params = request.params;
+    
+
     reply();
 
 };
