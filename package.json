@@ -6,8 +6,9 @@
   "scripts": {
     "clean": "rimraf \"build/*\" && rimraf \"dist/*\"",
     "dist": "npm run clean && gulp dist",
-    "start": "nodemon src/index.js --watch src",
-    "test": "jasmine"
+    "start": "parallelshell \"nodemon src/server.js --watch src\" \"npm run watch\"",
+    "test": "jasmine",
+    "watch": "nodemon -w src -w spec -x \"npm run test\""
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
@@ -25,6 +26,7 @@
     "mockgoose": "^5.0.10",
     "moment": "^2.10.6",
     "nodemon": "^1.7.2",
+    "parallelshell": "^2.0.0",
     "rimraf": "^2.4.3",
     "run-sequence": "^1.1.5",
     "sync-exec": "^0.6.2"

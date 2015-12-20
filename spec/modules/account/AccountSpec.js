@@ -1,16 +1,10 @@
 'use strict';
 
 var Account = require('../../../src/modules/account/Account');
+var testFixture = require('./accountFixture');
 
 
 describe('Account', function() {
-
-    var testFixture = {
-        'name': 'Jerome Horwitz',
-        'email': 'jhorwitz@skillsync.io',
-        'password': 'curly',
-        'status': 'VERIFIED'
-    };
 
     beforeEach(function() {
         // Make sure the collection is empty

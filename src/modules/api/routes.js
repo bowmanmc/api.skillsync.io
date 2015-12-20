@@ -4,6 +4,6 @@ var handlers = require('./handlers');
 
 module.exports = [{
     method: 'GET',
-    path: '/hello',
+    path: '/api/hello',
     handler: handlers.hello
 }];

@@ -3,7 +3,7 @@
 var handlers = require('./handlers');
 
 module.exports = [{
-    method: 'GET',
-    path: '/account'
-    //handler: handlers.hello
+    method: 'POST',
+    path: '/account/isregistered',
+    handler: handlers.isRegistered
 }];

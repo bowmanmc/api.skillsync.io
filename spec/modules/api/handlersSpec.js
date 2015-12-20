@@ -6,7 +6,7 @@ describe('API Routes', function() {
     
     it('has a hello route', function() {
         var helloRoutes = routes.filter(function(route) {
-            return route.path === '/hello';
+            return route.path === '/api/hello';
         });
         expect(helloRoutes.length).toBe(1);
     });
