@@ -11,10 +11,11 @@
  *      - login - sign into account (generate jwt)
  *      - logout - sign out of account (invalidate jwt)
  */
-var isRegistered = require('./isRegistered');
+
 
 module.exports = {
 
-    isRegistered: isRegistered
+    isRegistered: require('./isRegistered'),
+    register: require('./register')
 
 };

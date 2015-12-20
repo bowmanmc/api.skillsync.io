@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Test for modules/account/handlers.js #isRegistered
- */
 var Account = require('../../../../src/modules/account/Account');
 var accountFixture = require('../accountFixture');
 var handlers = require('../../../../src/modules/account/handlers');
@@ -53,10 +50,10 @@ describe('Account Handler - isRegistered', function() {
     });
     
     it('should return false for requests without email param', function(done) {
-        handlers.isRegistered({}, function(response) {
+        handlers.isRegistered({params: {}}, function(response) {
             expect(response.isRegistered).toBe(false);
             done();
-        })
+        });
     });
 
     it('should return true for registered emails', function(done) {

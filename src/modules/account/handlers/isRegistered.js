@@ -4,29 +4,30 @@
  * 
  * API for checking to see if an email is registered
  */
+var Account = require('../Account');
 
-var  Account = require('../Account');
 
 var irFalse = {
     'isRegistered': false
 };
+
 var irTrue = {
     'isRegistered': true
 };
 
+
 module.exports = function(request, reply) {
     // Validate request params
-    if (typeof request === 'undefined' ||
-        typeof request.params === 'undefined' ||
-        typeof request.params.email === 'undefined' ||
-        request.params.email === null ||
+    if (!request.params.email ||
         request.params.email.length < 3 ||
         request.params.email.indexOf('@') < 0
     ) {
         // invalid email parameter
         reply(irFalse);
+        return; // no need to check the database
     }
 
+    // Check the database for a record with the passed in email
     Account.findByEmail(request.params.email, function(err, result) {
         if (result) {
             reply(irTrue);
@@ -35,4 +36,5 @@ module.exports = function(request, reply) {
             reply(irFalse);
         }
     });
+
 };
