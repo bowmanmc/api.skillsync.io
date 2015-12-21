@@ -10,7 +10,7 @@ module.exports = {
         email: Joi.string().email().required()
     }),
 
-    Email: Joi.string().email(),
+    Email: Joi.string().email().required(),
 
     Password: Joi.object().keys({
         userId: Joi.string().required(),
