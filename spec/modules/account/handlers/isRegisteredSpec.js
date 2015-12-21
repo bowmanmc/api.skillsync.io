@@ -5,7 +5,7 @@ var accountFixture = require('../accountFixture');
 var handlers = require('../../../../src/modules/account/handlers');
 
 
-describe('Account Handler - isRegistered', function() {
+describe('Account - isRegistered', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty

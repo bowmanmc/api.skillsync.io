@@ -4,7 +4,9 @@
  * 
  * API for checking to see if an email is registered
  */
+
 var Account = require('../Account');
+var validators = require('../validators');
 
 
 var irFalse = {
@@ -17,23 +19,22 @@ var irTrue = {
 
 
 module.exports = function(request, reply) {
-    // Validate request params
-    if (!request.params.email ||
-        request.params.email.length < 3 ||
-        request.params.email.indexOf('@') < 0
-    ) {
-        // invalid email parameter
-        reply(irFalse);
-        return; // no need to check the database
-    }
 
-    // Check the database for a record with the passed in email
-    Account.findByEmail(request.params.email, function(err, result) {
-        if (result) {
-            reply(irTrue);
+    validators.checkEmail(request.params.email, function(errors) {
+        if(errors) {
+            // invalid email parameter
+            reply(irFalse);
         }
         else {
-            reply(irFalse);
+            // Check the database for a record with the passed in email
+            Account.findByEmail(request.params.email, function(err, result) {
+                if (result) {
+                    reply(irTrue);
+                }
+                else {
+                    reply(irFalse);
+                }
+            });
         }
     });
 
