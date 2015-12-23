@@ -1,15 +1,16 @@
 'use strict';
 
-var Account = require('../../../../src/modules/account/Account');
+var src = '../../../../src/modules/account';
+var models = require(src + '/models');
 var accountFixture = require('../accountFixture');
-var handlers = require('../../../../src/modules/account/handlers');
+var handlers = require(src + '/handlers');
 
 
 describe('account.handlers.registered', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
-        Account.remove({}, function(err) {
+        models.Account.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping account collection!', err);
             }
@@ -18,7 +19,7 @@ describe('account.handlers.registered', function() {
 
     afterEach(function() {
         // Clean up after ourselves
-        Account.remove({}, function(err) {
+        models.Account.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping account collection!', err);
             }
@@ -58,7 +59,7 @@ describe('account.handlers.registered', function() {
 
     it('should return true for registered emails', function(done) {
         // register a test user
-        var testAccount = new Account(accountFixture);
+        var testAccount = new models.Account(accountFixture);
         testAccount.save(function() {
             var request = {
                 params: {

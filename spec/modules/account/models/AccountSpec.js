@@ -1,6 +1,6 @@
 'use strict';
 
-var Account = require('../../../src/modules/account/Account');
+var Account = require('../../../../src/modules/account/models/Account');
 var testFixture = require('./accountFixture');
 
 

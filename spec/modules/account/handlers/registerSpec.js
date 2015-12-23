@@ -1,19 +1,18 @@
 'use strict';
 
-var  Account = require('../../../../src/modules/account/Account');
-var Password = require('../../../../src/modules/account/Password');
+var models = require('../../../../src/modules/account/models');
 
 
 describe('account.handlers.register', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
-        Account.remove({}, function(err) {
+        models.Account.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping collection!', err);
             }
         });
-        Password.remove({}, function(err) {
+        models.Password.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping collection!', err);
             }
@@ -22,12 +21,12 @@ describe('account.handlers.register', function() {
 
     afterEach(function() {
         // Clean up after ourselves
-        Account.remove({}, function(err) {
+        models.Account.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping collection!', err);
             }
         });
-        Password.remove({}, function(err) {
+        models.Password.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping collection!', err);
             }

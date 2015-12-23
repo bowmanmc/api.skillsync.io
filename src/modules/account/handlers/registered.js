@@ -5,7 +5,7 @@
  * API for checking to see if an email is registered
  */
 
-var Account = require('../Account');
+var models = require('../models');
 
 
 var irFalse = {
@@ -20,7 +20,7 @@ var irTrue = {
 module.exports = function(request, reply) {
 
     // Check the database for a record with the passed in email
-    Account.findByEmail(request.payload.email, function(err, result) {
+    models.Account.findByEmail(request.payload.email, function(err, result) {
         if (result) {
             reply(irTrue);
         }

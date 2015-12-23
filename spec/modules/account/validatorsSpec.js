@@ -3,7 +3,7 @@
 var Joi = require('joi');
 
 var validators = require('../../../src/modules/account/validators');
-var accountFixture = require('./accountFixture');
+var accountFixture = require('./models/accountFixture');
 var validationOptions = {
     abortEarly: false,  // validate all fields
     allowUnknown: true  // ignore extra passed in fields

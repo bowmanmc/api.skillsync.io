@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Password = require('../../../src/modules/account/Password');
+var Password = require('../../../../src/modules/account/models/Password');
 
 
 describe('Password', function() {

@@ -6,15 +6,14 @@
  */
 var Boom = require('boom');
 
-var  Account = require('../Account');
-var Password = require('../Password');
+var models = require('../models');
 
 
 module.exports = function(request, reply) {
 
     var payload = request.payload;
-    var account = new Account(payload);
-    var password = new Password(payload);
+    var account = new models.Account(payload);
+    var password = new models.Password(payload);
 
     account.save(function(error) {
 
