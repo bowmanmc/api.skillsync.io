@@ -3,8 +3,12 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+const mongoose = require('mongoose');
 const config = require('./config');
 const Hapi = require('hapi');
+
+// connect to mongo
+mongoose.connect(config.mongo);
 
 // Create a server with a host and port
 const server = new Hapi.Server({
@@ -16,7 +20,15 @@ const server = new Hapi.Server({
 });
 
 server.connection({ 
-    port: config.port 
+    port: config.port,
+    routes: {
+        validate: {
+            options: {
+                abortEarly: false,
+                stripUnknown: true
+            }
+        }
+    }
 });
 
 // Add the routes

@@ -2,7 +2,7 @@
 /**
  * Handlers for requests to /account/*
  * Operations:
- *      - isRegistered - is email address available?
+ *      - registered - is email address available?
  *      - register - create an account and password
  *      - verify - verify a newly created account
  *      - reset - reset a password (forgot password)
@@ -15,7 +15,7 @@
 
 module.exports = {
 
-    isRegistered: require('./isRegistered'),
+    registered: require('./registered'),
     register: require('./register')
 
 };

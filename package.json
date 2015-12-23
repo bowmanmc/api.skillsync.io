@@ -6,12 +6,14 @@
   "scripts": {
     "clean": "rimraf \"build/*\" && rimraf \"dist/*\"",
     "dist": "npm run clean && gulp dist",
-    "start": "parallelshell \"nodemon src/server.js --watch src\" \"npm run watch\"",
+    "server": "nodemon src/server.js --watch src",
+    "start": "parallelshell \"npm run server\" \"npm run watch\"",
     "test": "jasmine",
     "watch": "nodemon -w src -w spec -x \"npm run test\""
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "boom": "^3.1.0",
     "hapi": "^11.1.2",
     "joi": "^7.0.1",
     "lodash": "^3.10.1",

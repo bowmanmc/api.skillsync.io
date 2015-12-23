@@ -5,7 +5,7 @@ var accountFixture = require('../accountFixture');
 var handlers = require('../../../../src/modules/account/handlers');
 
 
-describe('Account - isRegistered', function() {
+describe('account.handlers.registered', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
@@ -31,8 +31,8 @@ describe('Account - isRegistered', function() {
                 'email': 'modules.account.isRegisteredSpec@test.com'
             }
         };
-        handlers.isRegistered(request, function(response) {
-            expect(response.isRegistered).toBe(false);
+        handlers.registered(request, function(response) {
+            expect(response.registered).toBe(false);
             done();
         });
     });
@@ -43,15 +43,15 @@ describe('Account - isRegistered', function() {
                 'email': null
             }
         };
-        handlers.isRegistered(request, function(response) {
-            expect(response.isRegistered).toBe(false);
+        handlers.registered(request, function(response) {
+            expect(response.registered).toBe(false);
             done();
         });
     });
     
     it('should return false for requests without email param', function(done) {
-        handlers.isRegistered({params: {}}, function(response) {
-            expect(response.isRegistered).toBe(false);
+        handlers.registered({params: {}}, function(response) {
+            expect(response.registered).toBe(false);
             done();
         });
     });
@@ -65,8 +65,8 @@ describe('Account - isRegistered', function() {
                     email: accountFixture.email
                 }
             };
-            handlers.isRegistered(request, function(response) {
-                expect(response.isRegistered).toBe(true);
+            handlers.registered(request, function(response) {
+                expect(response.registered).toBe(true);
                 done();
             });
         });

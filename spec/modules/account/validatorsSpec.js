@@ -1,97 +1,102 @@
 'use strict';
 
+var Joi = require('joi');
+
 var validators = require('../../../src/modules/account/validators');
 var accountFixture = require('./accountFixture');
+var validationOptions = {
+    abortEarly: false,  // validate all fields
+    allowUnknown: true  // ignore extra passed in fields
+};
 
+describe('account.validators.register', function() {
 
-describe('Account Validators', function() {
-
-    it('should validate valid accounts', function(done) {
-        validators.checkAccount(accountFixture, function(errors) {
-            expect(errors).toBeNull();
-            done();
-        });
+    it('should validate valid parameters', function(done) {
+        Joi.validate(accountFixture, validators.register,
+            function(errors) {
+                expect(errors).toBeNull();
+                done();
+            }
+        );
     });
 
     it('should invalidate empty params', function(done) {
         var params = {};
-        validators.checkAccount(params, function(errors) {
-            expect(errors).not.toBeNull();
-            // 2 required fields - name & email
-            expect(errors.details.length).toBe(2);
-            done();
-        });
+        Joi.validate(params, validators.register, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                // 3 required fields - name, email, and password
+                expect(errors.details.length).toBe(3);
+                done();
+            }
+        );
     });
 
     it('should invalidate invalid email param', function(done) {
         var params = {
             'name': 'Spec McTest',
-            'email': 'foo' // invalid email
+            'email': 'foo', // invalid email
+            'password': '123'
         };
-        validators.checkAccount(params, function(errors) {
-            expect(errors).not.toBeNull();
-            expect(errors.details[0].path).toBe('email');
-            done();
-        });
+        Joi.validate(params, validators.register, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details[0].path).toBe('email');
+                done();
+            }
+        );
     });
 
 });
 
-describe('Email Validators', function() {
+describe('account.validators.registered', function() {
+
     it('should validate valid emails', function(done) {
-        validators.checkEmail('smctest@spec.org', function(errors) {
-            expect(errors).toBeNull();
-            done();
-        });
+        var params = {
+            'email': 'smctest@spec.org'
+        };
+        Joi.validate(params, validators.registered, validationOptions,
+            function(errors) {
+                expect(errors).toBeNull();
+                done();
+            }
+        );
     });
     
     it('should not validate null emails', function(done) {
-        validators.checkEmail(null, function(errors) {
-            expect(errors).not.toBeNull();
-            expect(errors.details.length).toBe(1);
-            done();
-        });
+        Joi.validate({}, validators.registered, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details.length).toBe(1);
+                done();
+            }
+        );
     });
     
     it('should not validate empty emails', function(done) {
-        var test = '      ';
-        validators.checkEmail(test, function(errors) {
-            expect(errors).not.toBeNull();
-            expect(errors.details.length).toBe(1);
-            done();
-        });
+        var params = {
+            'email': '      '
+        };
+        Joi.validate(params, validators.registered, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details.length).toBe(1);
+                done();
+            }
+        );
     });
     
     it('should not validate bogus emails', function(done) {
-        var test = 'foobarbaz';
-        validators.checkEmail(test, function(errors) {
-            expect(errors).not.toBeNull();
-            expect(errors.details.length).toBe(1);
-            done();
-        });
-    });
-
-});
-
-describe('Password Validators', function() {
-
-    it('should validate valid params', function(done) {
         var params = {
-            userId: 'foobarbaz',
-            password: 'foobarbaz'
+            'email': 'foobarbaz'
         };
-        validators.checkPassword(params, function(errors) {
-            expect(errors).toBeNull();
-            done();
-        });
-    });
-    
-    it('should not validate empty parameters', function(done) {
-        validators.checkPassword({}, function(errors) {
-            expect(errors).not.toBeNull();
-            expect(errors.details.length).toBe(2);
-            done();
-        });
+        Joi.validate(params, validators.registered, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details.length).toBe(1);
+                done();
+            }
+        );
     });
 
 });

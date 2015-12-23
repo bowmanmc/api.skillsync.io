@@ -4,6 +4,7 @@
  * 
  * API for creating new accounts
  */
+var Boom = require('boom');
 
 var  Account = require('../Account');
 var Password = require('../Password');
@@ -11,10 +12,33 @@ var Password = require('../Password');
 
 module.exports = function(request, reply) {
 
-    // Validate the request
-    var params = request.params;
-    
+    var payload = request.payload;
+    var account = new Account(payload);
+    var password = new Password(payload);
 
-    reply();
+    account.save(function(error) {
+
+        if (error) {
+            console.log('ERROR: account.save()', error);
+            reply(Boom.badRequest(error.errmsg));
+            return;
+        }
+
+        password.userId = account._id;
+
+        password.save(function(error) {
+            if (error) {
+                console.log('Error saving password!', error);
+                reply(Boom.badRequest(error.errmsg));
+                console.log('Deleting account ' + account._id + 
+                            ' due to password error on save.');
+                account.remove();
+            }
+
+            reply({
+                accountId: account._id
+            });
+        }); // password.save()
+    }); // account.save()
 
 };
