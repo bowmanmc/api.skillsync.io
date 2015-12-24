@@ -1,6 +1,10 @@
 'use strict';
 
-var models = require('../../../../src/modules/account/models');
+var src = '../../../../src/modules/account';
+var handlers = require(src + '/handlers');
+var models = require(src + '/models');
+
+var accountFixture = require('../models/accountFixture');
 
 
 describe('account.handlers.register', function() {
@@ -32,15 +36,14 @@ describe('account.handlers.register', function() {
             }
         });
     });
-    
-    it('should check for empty parameters', function(done) {
+
+    it('should register new accounts', function(done) {
         var request = {
-            params: {}
+            payload: accountFixture
         };
-        done();
-        // handlers.register.(request, function(response) {
-        //     console.log('response: ' + JSON.stringify(response));
-        //     done();
-        // });
+        handlers.register(request, function(response) {
+            expect(response.accountId).not.toBeNull();
+            done();
+        });
     });
 });
