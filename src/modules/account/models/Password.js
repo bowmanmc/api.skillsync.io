@@ -1,6 +1,7 @@
 'use strict';
 
-var bcrypt = require('bcrypt');
+var   bcrypt = require('bcrypt');
+var   moment = require('moment');
 var mongoose = require('mongoose');
 
 
@@ -15,6 +16,10 @@ var schema = new mongoose.Schema({
         index: true
     },
     password: String,
+    expirationDate: {
+        type: Date,
+        default: null
+    },
     status: {
         type: String,
         default: 'OK'
@@ -43,6 +48,20 @@ schema.pre('save', function(next) {
     next();
 });
 
+// instance methods
+schema.methods.isExpired = function() {
+    if (this.expirationDate) {
+        // not null... see if right now is after 
+        //var fmt = 'YYYY/MM/DD:HH:mm:ss';
+        //console.log('Checking ' + expire.format(fmt) + 
+        //            ' isBefore ' + moment().format(fmt));
+        var result = moment(this.expirationDate).isBefore(moment());
+        return result;
+    }
+    return false;
+};
+
+// static class methods
 schema.statics.findByUserId = function(userId, callback) {
     this.findOne({userId: userId}, function(err, pw) {
         callback(err, pw);

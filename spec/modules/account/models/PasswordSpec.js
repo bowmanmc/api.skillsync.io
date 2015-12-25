@@ -1,5 +1,5 @@
 'use strict';
-
+var   moment = require('moment');
 var mongoose = require('mongoose');
 var Password = require('../../../../src/modules/account/models/Password');
 
@@ -76,6 +76,33 @@ describe('Password', function() {
                 }
             );
         });
+    });
+
+    it('should not expire regular passwords', function(done) {
+        var pw = new Password(testFixture);
+        pw.save(function() {
+            expect(pw.isExpired()).toBe(false);
+            done();
+        });
+    });
+    
+    it('should expire passwords with expirationDates set', function(done) {
+        var pw = new Password(testFixture);
+        console.log('no expiration...');
+        expect(pw.isExpired()).toBe(false);
+
+        pw = new Password(testFixture);
+        var yesterday = moment().subtract(1, 'day');
+        pw.expirationDate = yesterday.toDate();
+        console.log('expired yesterday...');
+        expect(pw.isExpired()).toBe(true);
+
+        pw = new Password(testFixture);
+        var tomorrow = moment().add(1, 'day');
+        pw.expirationDate = tomorrow.toDate();
+        console.log('expires tomorrow...');
+        expect(pw.isExpired()).toBe(false);
+        done();
     });
 
 });
