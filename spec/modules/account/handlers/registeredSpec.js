@@ -2,8 +2,9 @@
 
 var src = '../../../../src/modules/account';
 var models = require(src + '/models');
-var accountFixture = require('../accountFixture');
 var handlers = require(src + '/handlers');
+
+var accountFixture = require('../models/accountFixture');
 
 
 describe('account.handlers.registered', function() {
@@ -28,7 +29,7 @@ describe('account.handlers.registered', function() {
 
     it('should return false for bogus emails', function(done) {
         var request = {
-            params: {
+            payload: {
                 'email': 'modules.account.isRegisteredSpec@test.com'
             }
         };
@@ -40,7 +41,7 @@ describe('account.handlers.registered', function() {
 
     it('should return false for null emails', function(done) {
         var request = {
-            params: {
+            payload: {
                 'email': null
             }
         };
@@ -51,18 +52,18 @@ describe('account.handlers.registered', function() {
     });
     
     it('should return false for requests without email param', function(done) {
-        handlers.registered({params: {}}, function(response) {
+        handlers.registered({payload: {}}, function(response) {
             expect(response.registered).toBe(false);
             done();
         });
     });
-
+    
     it('should return true for registered emails', function(done) {
         // register a test user
         var testAccount = new models.Account(accountFixture);
         testAccount.save(function() {
             var request = {
-                params: {
+                payload: {
                     email: accountFixture.email
                 }
             };
