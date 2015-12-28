@@ -18,8 +18,6 @@ describe('account.logic.resetPassword', function() {
         expect(password.password).not.toBe(pass);
         expect(password.expirationDate).not.toBeNull();
         expect(password.isExpired()).toBe(false);
-
-        console.log('password: ' + password.password);
     });
-    
+
 });

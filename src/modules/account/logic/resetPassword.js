@@ -14,7 +14,6 @@ module.exports = function(password) {
     var token = utils.generateToken(tokenLength);
 
     // reset password to token
-    console.log('setting password to ' + token);
     password.password = token;
 
     // set expiration date
@@ -23,5 +22,4 @@ module.exports = function(password) {
 
     // set status
     password.status = 'RESET';
-
 };
