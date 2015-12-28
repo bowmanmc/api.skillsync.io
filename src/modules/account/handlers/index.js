@@ -16,6 +16,7 @@
 module.exports = {
 
     registered: require('./registered'),
-    register: require('./register')
+    register: require('./register'),
+    reset: require('./reset')
 
 };
