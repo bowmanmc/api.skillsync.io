@@ -1,7 +1,7 @@
 'use strict';
 /**
  * reset
- * 
+ *
  * API for resetting passwords
  */
 var   Boom = require('boom');
