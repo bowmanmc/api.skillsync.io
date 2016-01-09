@@ -9,6 +9,8 @@ module.exports = {
 
     generateToken: function(length) {
         return crypto.randomBytes(length * 2).toString('hex').slice(length * -1);
-    }
+    },
+
+    sendEmail: require('./email')
 
 };

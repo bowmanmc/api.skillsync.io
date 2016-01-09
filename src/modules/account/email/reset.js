@@ -2,19 +2,8 @@
 /**
  * reset
  *
- * Send password reset email
+ * Generate password reset email
  */
-
-// const nodemailer = require('nodemailer');
-// const sesTransport = require('nodemailer-ses-transport');
-// const AWS = require('aws-sdk');
-//
-// var ses = new AWS.SES({
-//     region: 'us-east-1'
-// });
-// var transport = nodemailer.createTransport(sesTransport({
-//     ses: ses
-// }));
 var ejs = require('ejs');
 var fs = require('fs');
 var path = require('path');
@@ -34,15 +23,4 @@ module.exports = function(account, token) {
         }
     );
     return result;
-
-    // console.log('Sending email to: ' + account.email);
-    // transport.sendMail({
-    //         transport : transport, //pass your transport
-    //         from: 'support@skillsync.io',
-    //         to : 'bowmanmc@gmail.com',
-    //         subject : 'TEST',
-    //         html: '<p> You can send email programatically via SES </p>'
-    //     }, function(error) {
-    //         console.log('Error sending email!', error);
-    //     });
 };

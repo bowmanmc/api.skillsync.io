@@ -1,7 +1,7 @@
 'use strict';
 /**
  * resetPassword
- * 
+ *
  */
 var moment = require('moment');
 
@@ -14,7 +14,7 @@ module.exports = function(password) {
     var token = utils.generateToken(tokenLength);
 
     // reset password to token
-    password.password = token;
+    password.token = token;
 
     // set expiration date
     var expireOn = moment().add(4, 'hours').toDate();
@@ -22,4 +22,5 @@ module.exports = function(password) {
 
     // set status
     password.status = 'RESET';
+
 };
