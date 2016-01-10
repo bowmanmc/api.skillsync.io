@@ -4,10 +4,12 @@
  *
  * API for resetting passwords
  */
-var   Boom = require('boom');
+const   Boom = require('boom');
 
-var  logic = require('../logic');
-var models = require('../models');
+const emails = require('../email');
+const  logic = require('../logic');
+const models = require('../models');
+const  utils = require('../../../utils');
 
 
 module.exports = function(request, reply) {
@@ -28,13 +30,17 @@ module.exports = function(request, reply) {
             }
 
             logic.resetPassword(password);
-            var token = password.password;
-            // need to email the token to the user...
+            // the token isn't hashed until it's saved...
+            const email = emails.reset(account, password.token);
+            const title = 'Forget Something? Reset your SkillSync.io password here!';
 
             password.save(function(errors) {
                 if (errors) {
                     reply(Boom.badImplementation(errors));
                 }
+
+                utils.sendEmail(account.email, title, email);
+
                 reply({
                     success: true
                 });

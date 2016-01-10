@@ -3,6 +3,6 @@
 
 module.exports = {
 
-    reset: require('./reset')
+    sendReset: require('./reset')
 
 };
