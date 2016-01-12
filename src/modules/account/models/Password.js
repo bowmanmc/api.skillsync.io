@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
  * change.
  */
 var schema = new mongoose.Schema({
-    userId: {
+    accountId: {
         type: mongoose.Schema.Types.ObjectId,
         index: true
     },
@@ -93,12 +93,12 @@ schema.methods.checkToken = function(candidate) {
 };
 
 // static class methods
-schema.statics.findByUserId = function(userId, callback) {
-    this.findOne({userId: userId}, callback);
+schema.statics.findByAccountId = function(accountId, callback) {
+    this.findOne({accountId: accountId}, callback);
 };
 
-schema.statics.authenticate = function(userId, candidate, callback) {
-    this.findByUserId(userId, function(err, pw) {
+schema.statics.authenticate = function(accountId, candidate, callback) {
+    this.findByAccountId(accountId, function(err, pw) {
         var result = false;
         if (pw !== null) {
             result = bcrypt.compareSync(candidate, pw.password);

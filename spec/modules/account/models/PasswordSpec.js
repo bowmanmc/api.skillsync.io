@@ -7,7 +7,7 @@ var Password = require('../../../../src/modules/account/models/Password');
 describe('account.models.Password', function() {
 
     var testFixture = {
-        userId: mongoose.Types.ObjectId(),
+        accountId: mongoose.Types.ObjectId(),
         password: 'password123'
     };
 
@@ -42,8 +42,8 @@ describe('account.models.Password', function() {
         pw.save(function() {
             // password is hashed
             expect(pw.password).not.toBe(testFixture.password);
-            // lookup by userId and make sure they match
-            Password.findByUserId(testFixture.userId, function(err, result) {
+            // lookup by accountId and make sure they match
+            Password.findByAccountId(testFixture.accountId, function(err, result) {
                 expect(result.password).toBe(pw.password);
                 done();
             });
@@ -54,7 +54,7 @@ describe('account.models.Password', function() {
         var pw = new Password(testFixture);
         pw.save(function() {
             Password.authenticate(
-                testFixture.userId,
+                testFixture.accountId,
                 testFixture.password,
                 function(result) {
                     expect(result).toBe(true);
@@ -68,7 +68,7 @@ describe('account.models.Password', function() {
         var pw = new Password(testFixture);
         pw.save(function() {
             Password.authenticate(
-                testFixture.userId,
+                testFixture.accountId,
                 'foobarbaz',
                 function(result) {
                     expect(result).toBe(false);

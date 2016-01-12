@@ -23,7 +23,7 @@ module.exports = function(request, reply) {
         }
 
         // We got a user, lookup the corresponding password record
-        models.Password.findByUserId(account._id, function(password) {
+        models.Password.findByAccountId(account._id, function(password) {
             if (!password) {
                 reply(Boom.notFound(`No password found for "${payload.email}"`));
                 return;
