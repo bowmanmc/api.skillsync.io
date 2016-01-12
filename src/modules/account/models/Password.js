@@ -94,9 +94,7 @@ schema.methods.checkToken = function(candidate) {
 
 // static class methods
 schema.statics.findByUserId = function(userId, callback) {
-    this.findOne({userId: userId}, function(err, pw) {
-        callback(err, pw);
-    });
+    this.findOne({userId: userId}, callback);
 };
 
 schema.statics.authenticate = function(userId, candidate, callback) {

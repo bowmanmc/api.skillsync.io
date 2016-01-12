@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Password = require('../../../../src/modules/account/models/Password');
 
 
-describe('Password', function() {
+describe('account.models.Password', function() {
 
     var testFixture = {
         userId: mongoose.Types.ObjectId(),
@@ -19,7 +19,7 @@ describe('Password', function() {
             }
         });
     });
-    
+
     afterEach(function() {
         // Make sure the collection is empty
         Password.remove({}, function(err) {
@@ -28,7 +28,7 @@ describe('Password', function() {
             }
         });
     });
-    
+
     it('should hash passwords on save', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {
@@ -36,7 +36,7 @@ describe('Password', function() {
             done();
         });
     });
-    
+
     it('should lookup passwords by user', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {
@@ -49,7 +49,7 @@ describe('Password', function() {
             });
         });
     });
-    
+
     it('should authenticate valid passwords', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {
@@ -63,7 +63,7 @@ describe('Password', function() {
             );
         });
     });
-    
+
     it('should fail bad passwords', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {

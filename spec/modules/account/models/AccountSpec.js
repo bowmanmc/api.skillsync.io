@@ -4,7 +4,7 @@ var Account = require('../../../../src/modules/account/models/Account');
 var testFixture = require('./accountFixture');
 
 
-describe('Account', function() {
+describe('account.models.Account', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
@@ -33,7 +33,7 @@ describe('Account', function() {
             done();
         });
     });
-    
+
     it('should return null for bad ids', function(done) {
         // Accounts should be empty...
         Account.findById('51bb793aca2ab77a3200000d', function(err, result) {
@@ -41,7 +41,7 @@ describe('Account', function() {
             done();
         });
     });
-    
+
     it('can lookup users by email', function(done) {
         var testAccount = new Account(testFixture);
         testAccount.save(function() {
@@ -52,7 +52,7 @@ describe('Account', function() {
             });
         });
     });
-    
+
     it('can lookup users by id', function(done) {
         var testAccount = new Account(testFixture);
         testAccount.save(function() {
