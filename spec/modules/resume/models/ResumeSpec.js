@@ -24,9 +24,12 @@ describe('resume.models.Resume', function() {
         });
     });
 
-    it('can create an Resume', function(done) {
+    it('can create a Resume', function(done) {
         var testResume = new Resume(testFixture);
-        testResume.save(function() {
+        testResume.save(function(err) {
+            if (err) {
+                console.log('You got an error dawg!', err);
+            }
             expect(testResume._id).not.toBe(null);
             expect(testResume.created).not.toBe(null);
             expect(testResume.updated).not.toBe(null);
@@ -55,4 +58,16 @@ describe('resume.models.Resume', function() {
         });
     });
 
+    it('should use empty arrays', function(done) {
+        var account = '51bb793aca2ab77a3200000d';
+        var testResume = new Resume({
+            accountId: account // only required field
+        });
+        testResume.save(function() {
+            expect(testResume._id).not.toBe(null);
+            expect(testResume.education.length).toBe(0);
+            expect(testResume.work.length).toBe(0);
+            done();
+        });
+    });
 });

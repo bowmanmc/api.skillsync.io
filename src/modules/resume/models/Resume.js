@@ -11,6 +11,10 @@ var schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         index: true
     },
+    years: {
+        type: Number,
+        index: true
+    },
     summary: {
         type: String,
         required: true,

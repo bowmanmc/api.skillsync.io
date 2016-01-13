@@ -4,13 +4,20 @@ var moment = require('moment');
 
 
 module.exports = {
-    'accountId': '1234',
+    'accountId': '51bb793aca2ab77a3200000d',
     'summary': 'I want to be a good test',
+    'years': 12,
     'work': [{
         'name': 'SkillSync',
         'url': 'http://skillsync.io',
-        'startDate': moment().subtract(10, 'years').toDate(),
-        'endDate': moment().subtract(5, 'years').toDate()
+        'startDate': moment([2012, 1, 10]).toDate(),
+        'endDate': moment([2013, 1, 10]).toDate()
     }],
-    'education': []
+    'education': [{
+        'institution': 'School of Hard Knocks',
+        'url': 'http://foo.bar.com',
+        'startDate': moment([2013, 1, 10]).toDate(),
+        'endDate': null,
+        'crediential': 'BS in Unit Testing'
+    }]
 };
