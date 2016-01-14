@@ -15,6 +15,10 @@ var schema = new mongoose.Schema({
         type: Number,
         index: true
     },
+    location: {
+        type: String,
+        index: true
+    },
     summary: {
         type: String,
         required: true,

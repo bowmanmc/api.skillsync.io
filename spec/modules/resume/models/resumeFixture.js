@@ -7,6 +7,7 @@ module.exports = {
     'accountId': '51bb793aca2ab77a3200000d',
     'summary': 'I want to be a good test',
     'years': 12,
+    'location': 'Dayton, Ohio',
     'work': [{
         'name': 'SkillSync',
         'url': 'http://skillsync.io',
