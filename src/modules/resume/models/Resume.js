@@ -67,6 +67,10 @@ var schema = new mongoose.Schema({
             type: String
         }
     })],
+    skills: {
+        type: Array,
+        default: []
+    },
     created: {
         type: Date,
         default: Date.now
