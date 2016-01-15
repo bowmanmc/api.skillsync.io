@@ -10,16 +10,25 @@ module.exports = [{
     handler: handlers.registered,
     config: {
         validate: {
-            payload: validators.isRegistered
+            payload: validators.registered
         }
     }
 }, {
-    path: '/account/register',
+    path: '/account',
     method: 'POST',
     handler: handlers.register,
     config: {
         validate: {
             payload: validators.register
+        }
+    }
+}, {
+    path: '/account/{accountId}',
+    method: 'PATCH',
+    handler: handlers.update,
+    config: {
+        validate: {
+            payload: validators.update
         }
     }
 }];
