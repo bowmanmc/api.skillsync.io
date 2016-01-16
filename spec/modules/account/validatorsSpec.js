@@ -46,7 +46,6 @@ describe('account.validators.register', function() {
             }
         );
     });
-
 });
 
 describe('account.validators.registered', function() {
@@ -62,7 +61,7 @@ describe('account.validators.registered', function() {
             }
         );
     });
-    
+
     it('should not validate null emails', function(done) {
         Joi.validate({}, validators.registered, validationOptions,
             function(errors) {
@@ -72,7 +71,7 @@ describe('account.validators.registered', function() {
             }
         );
     });
-    
+
     it('should not validate empty emails', function(done) {
         var params = {
             'email': '      '
@@ -85,7 +84,7 @@ describe('account.validators.registered', function() {
             }
         );
     });
-    
+
     it('should not validate bogus emails', function(done) {
         var params = {
             'email': 'foobarbaz'
@@ -98,5 +97,45 @@ describe('account.validators.registered', function() {
             }
         );
     });
+});
 
+describe('account.validators.update', function() {
+
+    it('should validate valid emails', function(done) {
+        var params = {
+            'email': 'smctest@spec.org'
+        };
+        Joi.validate(params, validators.update, validationOptions,
+            function(errors) {
+                expect(errors).toBeNull();
+                done();
+            }
+        );
+    });
+
+    it('should not validate empty emails', function(done) {
+        var params = {
+            'email': '      '
+        };
+        Joi.validate(params, validators.update, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details.length).toBe(1);
+                done();
+            }
+        );
+    });
+
+    it('should not validate bogus emails', function(done) {
+        var params = {
+            'email': 'foobarbaz'
+        };
+        Joi.validate(params, validators.update, validationOptions,
+            function(errors) {
+                expect(errors).not.toBeNull();
+                expect(errors.details.length).toBe(1);
+                done();
+            }
+        );
+    });
 });
