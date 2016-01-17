@@ -3,6 +3,7 @@
 
 module.exports = {
 
-    resetPassword: require('./resetPassword')
+    resetPassword: require('./resetPassword'),
+    updateAccount: require('./update')
 
 };
