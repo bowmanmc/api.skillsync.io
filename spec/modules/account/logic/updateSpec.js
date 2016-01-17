@@ -19,7 +19,20 @@ describe('account.logic.update', function() {
 
         expect(account.email).toBe(accountFixture.email);
         expect(account.name).not.toBe(accountFixture.name);
+    });
 
+    it('should not update unknown params', function() {
+
+        var account = new models.Account(accountFixture);
+        var updates = {
+            name: 'Moe Howard',
+            foo: 'nothing'
+        };
+
+        logic.updateAccount(account, updates);
+
+        expect(account.name).not.toBe(accountFixture.name);
+        expect(account.foo).toBeUndefined();
     });
 
 });

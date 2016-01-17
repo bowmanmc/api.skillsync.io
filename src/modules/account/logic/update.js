@@ -16,7 +16,6 @@ module.exports = function(account, updates) {
     Object.keys(updates).forEach(function (key) {
 
         if (updatable.indexOf(key) >= 0) {
-            console.log('Updating attribute: ' + key + ' to "' + updates[key] + '"');
             account[key] = updates[key];
         }
 
