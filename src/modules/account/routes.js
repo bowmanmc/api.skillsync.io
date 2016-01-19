@@ -27,6 +27,7 @@ module.exports = [{
     method: 'PATCH',
     handler: handlers.update,
     config: {
+        auth: 'jwt',
         validate: {
             payload: validators.update
         }

@@ -19,7 +19,18 @@ const server = new Hapi.Server({
     }
 });
 
-server.connection({ 
+// Setup authentication strategy
+server.auth.strategy('jwt', 'jwt', {
+    key: 'NeverShareYourSecret',
+    validateFunc: validate,
+    verifyOptions: {
+        algorithms: ['HS256']
+    }
+});
+server.auth.default('jwt');
+
+// Connection information and defaults for validation behavior
+server.connection({
     port: config.port,
     routes: {
         validate: {
