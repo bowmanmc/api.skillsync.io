@@ -7,7 +7,6 @@
  * contain the session id. We just need to lookup the session and make sure
  * it hasn't expired.
  */
-var moment = require('moment');
 var Session = require('./models/Session');
 
 
@@ -21,9 +20,7 @@ module.exports = function(decoded, request, callback) {
     Session.findById(decoded.id, function(err, result) {
         // If we found a user with the decoded.id, the token is valid... make
         // sure it hasn't expired
-        var now = moment();
-        var expired = moment(result.expires).isBefore(now);
-        if (result && !expired) {
+        if (result && !result.isExpired()) {
             return callback(null, true);
         }
         // else the token is messed up or it's expired

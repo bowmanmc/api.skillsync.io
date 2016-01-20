@@ -43,7 +43,7 @@ describe('session.validator', function() {
 
     it('should return false for expired tokens', function(done) {
         var session = new Session({
-            expires: moment().subtract(1, 'day')
+            expirationDate: moment().subtract(1, 'day').toDate()
         });
         session.save(function() {
             var decoded = {
@@ -58,7 +58,7 @@ describe('session.validator', function() {
 
     it('should return true for valid tokens', function(done) {
         var session = new Session({
-            expires: moment().add(1, 'day')
+            expires: moment().add(1, 'day').toDate()
         });
         session.save(function() {
             var decoded = {

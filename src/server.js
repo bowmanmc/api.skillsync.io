@@ -9,7 +9,7 @@ const validator = require('./modules/session/validator');
 
 
 // connect to mongo
-mongoose.connect(config.mongo);
+mongoose.connect(config.MONGO);
 
 // Create a server with a host and port
 const server = new Hapi.Server({
@@ -22,7 +22,7 @@ const server = new Hapi.Server({
 
 // Connection information and defaults for validation behavior
 server.connection({
-    port: config.port,
+    port: config.PORT,
     routes: {
         validate: {
             options: {
@@ -40,14 +40,13 @@ server.register([{ register: jwt2 }], function(err) {
         console.log('Error registering hapi-auth-jwt2!!!', err);
     }
 
-    if (!process.env.JWT_SECRET) {
+    if (config.JWT_SECRET === 'development_jwt_key') {
         console.log('!!!! JWT_SECRET Environment Variable Not Set !!!!');
-        process.env.JWT_SECRET = 'development_jwt_key';
     }
 
     // Setup authentication strategy
     server.auth.strategy('jwt', 'jwt', {
-        key: process.env.JWT_SECRET,
+        key: config.JWT_SECRET,
         validateFunc: validator,
         verifyOptions: {
             algorithms: ['HS256']
