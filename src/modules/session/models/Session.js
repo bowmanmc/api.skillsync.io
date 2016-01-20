@@ -9,6 +9,10 @@ var schema = new mongoose.Schema({
     data: {
         type: mongoose.Schema.Types.Mixed
     },
+    expires: {
+        type: Date,
+        default: null
+    },
     created: {
         type: Date,
         default: Date.now
