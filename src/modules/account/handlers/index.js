@@ -2,21 +2,22 @@
 /**
  * Handlers for requests to /account/*
  * Operations:
- *      - registered - is email address available?
+ *      - authenticate - authenticate an email/password combo
  *      - register - create an account and password
- *      - verify - verify a newly created account
+ *      - registered - is email address available?
  *      - reset - reset a password (forgot password)
- *      - edit - edit an account
+ *      - update - edit an account
+
+ *      - verify - verify a newly created account
  *      - changepass - change password (send notice email)
- *      - login - sign into account (generate jwt)
  *      - logout - sign out of account (invalidate jwt)
  */
 
 
 module.exports = {
-
-    registered: require('./registered'),
+    authenticate: require('./authenticate'),
     register: require('./register'),
+    registered: require('./registered'),
     reset: require('./reset'),
     update: require('./update')
 };

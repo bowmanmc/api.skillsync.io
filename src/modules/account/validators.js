@@ -5,6 +5,11 @@ var Joi = require('joi');
 
 module.exports = {
 
+    authenticate: {
+        email: Joi.string().email().required(),
+        password: Joi.string().required()
+    },
+
     registered: {
         email: Joi.string().email().required()
     },

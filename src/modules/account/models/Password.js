@@ -97,13 +97,13 @@ schema.statics.findByAccountId = function(accountId, callback) {
     this.findOne({accountId: accountId}, callback);
 };
 
-schema.statics.authenticate = function(accountId, candidate, callback) {
+schema.statics.checkPassword = function(accountId, candidate, callback) {
     this.findByAccountId(accountId, function(err, pw) {
         var result = false;
         if (pw !== null) {
             result = bcrypt.compareSync(candidate, pw.password);
         }
-        callback(result);
+        callback(null, result);
     });
 };
 

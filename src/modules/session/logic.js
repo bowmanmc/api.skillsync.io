@@ -14,10 +14,13 @@ module.exports = {
             accountId: account._id,
             expirationDate: moment().add(90, 'days').toDate()
         });
+
         session.save(function() {
-            var token = jwt.sign({
-                id: session._id
-            }, config.JWT_SECRET);
+            var data = {
+                id: session._id,
+                accountId: account._id
+            };
+            var token = jwt.sign(data, config.JWT_SECRET);
             callback(null, token);
         });
     }

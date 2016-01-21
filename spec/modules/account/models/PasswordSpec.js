@@ -53,10 +53,10 @@ describe('account.models.Password', function() {
     it('should authenticate valid passwords', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {
-            Password.authenticate(
+            Password.checkPassword(
                 testFixture.accountId,
                 testFixture.password,
-                function(result) {
+                function(err, result) {
                     expect(result).toBe(true);
                     done();
                 }
@@ -67,10 +67,10 @@ describe('account.models.Password', function() {
     it('should fail bad passwords', function(done) {
         var pw = new Password(testFixture);
         pw.save(function() {
-            Password.authenticate(
+            Password.checkPassword(
                 testFixture.accountId,
                 'foobarbaz',
-                function(result) {
+                function(err, result) {
                     expect(result).toBe(false);
                     done();
                 }

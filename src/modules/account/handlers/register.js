@@ -1,7 +1,7 @@
 'use strict';
 /**
  * register
- * 
+ *
  * API for creating new accounts
  */
 var Boom = require('boom');
@@ -23,13 +23,13 @@ module.exports = function(request, reply) {
             return;
         }
 
-        password.userId = account._id;
+        password.accountId = account._id;
 
         password.save(function(error) {
             if (error) {
                 console.log('Error saving password!', error);
                 reply(Boom.badRequest(error.errmsg));
-                console.log('Deleting account ' + account._id + 
+                console.log('Deleting account ' + account._id +
                             ' due to password error on save.');
                 account.remove();
             }

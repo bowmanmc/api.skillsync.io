@@ -41,9 +41,8 @@ describe('session.logic', function() {
     it('should generate a token', function(done) {
         var account = new Account(acctFixture);
         account.save(function() {
-            console.log('created new account: ' + account._id);
             logic.login(account, function(err, result) {
-                console.log('Created token: ' + result);
+                expect(result).not.toBe(null);
                 done();
             });
         });
