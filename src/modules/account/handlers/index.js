@@ -16,6 +16,7 @@
 
 module.exports = {
     authenticate: require('./authenticate'),
+    lookup: require('./lookup'),
     register: require('./register'),
     registered: require('./registered'),
     reset: require('./reset'),

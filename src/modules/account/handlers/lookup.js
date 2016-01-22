@@ -1,12 +1,9 @@
 'use strict';
 /**
- * update
- *
- * patch method called on /account/{accountId}
+ * lookup
  */
 var Boom = require('boom');
 
-var logic = require('../logic');
 var models = require('../models');
 
 
@@ -33,10 +30,6 @@ module.exports = function(request, reply) {
             return;
         }
 
-        // Ok, we have a valid account. Update it
-        logic.updateAccount(account, request.payload);
-        account.save(function() {
-            reply(accountId).code(200);
-        });
+        reply(account.toJSON());
     });
 };

@@ -63,6 +63,9 @@ schema.pre('save', function(next) {
         this.token = thash;
     }
 
+    // update the updated field
+    this.updated = moment().toDate();
+
     next();
 });
 

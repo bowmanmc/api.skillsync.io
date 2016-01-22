@@ -5,7 +5,7 @@ module.exports = {
 
     login: require('./login'),
     resetPassword: require('./resetPassword'),
-    updateAccount: require('./update'),
+    updateAccount: require('./updateAccount'),
     validateSession: require('./validateSession')
 
 };

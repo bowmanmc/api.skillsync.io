@@ -5,7 +5,7 @@ const Hapi = require('hapi');
 const jwt2 = require('hapi-auth-jwt2');
 
 const config = require('./config');
-const validator = require('./modules/session/validator');
+const validateSession = require('./modules/account/logic/validateSession');
 
 
 // connect to mongo
@@ -47,7 +47,7 @@ server.register([{ register: jwt2 }], function(err) {
     // Setup authentication strategy
     server.auth.strategy('jwt', 'jwt', {
         key: config.JWT_SECRET,
-        validateFunc: validator,
+        validateFunc: validateSession,
         verifyOptions: {
             algorithms: ['HS256']
         }

@@ -1,6 +1,7 @@
 'use strict';
-
+var moment = require('moment');
 var mongoose = require('mongoose');
+
 
 /**
  * Account
@@ -15,7 +16,7 @@ var schema = new mongoose.Schema({
         type: String,
         required: true,
         index: {
-            unique: true 
+            unique: true
         }
     },
     status: {
@@ -25,16 +26,26 @@ var schema = new mongoose.Schema({
     },
     created: {
         type: Date,
-        default: Date.now 
+        default: Date.now
     },
     updated: {
         type: Date,
-        default: Date.now 
+        default: Date.now
     }
 });
+
+schema.pre('save', function(next) {
+
+    // update the updated field
+    this.updated = moment().toDate();
+
+    next();
+});
+
 schema.statics.findByEmail = function(email, callback) {
     return this.findOne({ 'email': email }, callback);
 };
+
 
 // export the model
 module.exports = mongoose.model('Account', schema);

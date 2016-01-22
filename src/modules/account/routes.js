@@ -5,16 +5,6 @@ var validators = require('./validators');
 
 
 module.exports = [{
-    path: '/account/registered',
-    method: 'POST',
-    handler: handlers.registered,
-    config: {
-        auth: false, // checking if an email is registered already
-        validate: {
-            payload: validators.registered
-        }
-    }
-}, {
     path: '/account',
     method: 'POST',
     handler: handlers.register,
@@ -23,6 +13,23 @@ module.exports = [{
         validate: {
             payload: validators.register
         }
+    }
+}, {
+    path: '/account/{accountId}',
+    method: 'PATCH',
+    handler: handlers.update,
+    config: {
+        auth: 'jwt', // updating an account
+        validate: {
+            payload: validators.update
+        }
+    }
+}, {
+    path: '/account/{accountId}',
+    method: 'GET',
+    handler: handlers.lookup,
+    config: {
+        auth: 'jwt' // get account details
     }
 }, {
     path: '/account/authenticate',
@@ -35,13 +42,13 @@ module.exports = [{
         }
     }
 }, {
-    path: '/account/{accountId}',
-    method: 'PATCH',
-    handler: handlers.update,
+    path: '/account/registered',
+    method: 'POST',
+    handler: handlers.registered,
     config: {
-        auth: 'jwt',
+        auth: false, // checking if an email is registered already
         validate: {
-            payload: validators.update
+            payload: validators.registered
         }
     }
 }];

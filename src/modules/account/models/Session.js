@@ -29,6 +29,12 @@ var schema = new mongoose.Schema({
     }
 });
 
+schema.pre('save', function(next) {
+    // update the updated field
+    this.updated = moment().toDate();
+    next();
+});
+
 // instance methods
 schema.methods.isExpired = function() {
     if (this.expirationDate) {
