@@ -7,7 +7,7 @@
  * contain the session id. We just need to lookup the session and make sure
  * it hasn't expired.
  */
-var Session = require('./models/Session');
+var Session = require('../models/Session');
 
 
 module.exports = function(decoded, request, callback) {

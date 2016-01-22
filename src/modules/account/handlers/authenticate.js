@@ -7,9 +7,9 @@
  */
 var Boom = require('boom');
 
+var logic = require('../logic');
 var Account = require('../models/Account');
 var Password = require('../models/Password');
-var sessionLogic = require('../../session/logic');
 
 
 module.exports = function(request, reply) {
@@ -35,7 +35,7 @@ module.exports = function(request, reply) {
             }
 
             // Initialize the session and return the jwt token
-            sessionLogic.login(account, function(err, token) {
+            logic.login(account, function(err, token) {
                 if (err) {
                     reply(Boom.badImplementation(err));
                     return;

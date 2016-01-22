@@ -1,14 +1,14 @@
 'use strict';
 
-var src = '../../../src';
-var Account = require(src + '/modules/account/models/Account');
-var Session = require(src + '/modules/session/models/Session');
-var logic = require(src + '/modules/session/logic');
+var src = '../../../../src/modules/account';
+var Account = require(src + '/models/Account');
+var Session = require(src + '/models/Session');
+var logic = require(src + '/logic');
 
-var acctFixture = require('../account/models/accountFixture');
+var acctFixture = require('../models/accountFixture');
 
 
-describe('session.logic', function() {
+describe('account.logic.login', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty

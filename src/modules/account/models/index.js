@@ -4,6 +4,6 @@
 module.exports = {
 
      Account: require('./Account'),
-    Password: require('./Password')
-
+    Password: require('./Password'),
+     Session: require('./Session')
 };

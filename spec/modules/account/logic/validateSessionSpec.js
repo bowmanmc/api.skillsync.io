@@ -2,12 +2,12 @@
 
 var moment = require('moment');
 
-var src = '../../../src/modules/session';
+var src = '../../../../src/modules/account';
 var Session = require(src + '/models/Session');
-var validator = require(src + '/validator');
+var logic = require(src + '/logic');
 
 
-describe('session.validator', function() {
+describe('account.logic.validateSession', function() {
 
     beforeEach(function() {
         // Make sure the collection is empty
@@ -28,14 +28,14 @@ describe('session.validator', function() {
     });
 
     it('should return false for null tokens', function(done) {
-        validator(null, null, function(err, result) {
+        logic.validateSession(null, null, function(err, result) {
             expect(result).toBe(false);
             done();
         });
     });
 
     it('should return false for invalid tokens', function(done) {
-        validator('foobarbaz', null, function(err, result) {
+        logic.validateSession('foobarbaz', null, function(err, result) {
             expect(result).toBe(false);
             done();
         });
@@ -49,7 +49,7 @@ describe('session.validator', function() {
             var decoded = {
                 id: session._id
             };
-            validator(decoded, null, function(err, result) {
+            logic.validateSession(decoded, null, function(err, result) {
                 expect(result).toBe(false);
                 done();
             });
@@ -64,7 +64,7 @@ describe('session.validator', function() {
             var decoded = {
                 id: session._id
             };
-            validator(decoded, null, function(err, result) {
+            logic.validateSession(decoded, null, function(err, result) {
                 expect(result).toBe(true);
                 done();
             });
