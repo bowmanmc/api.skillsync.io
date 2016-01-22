@@ -7,6 +7,7 @@
 var Boom = require('boom');
 
 var models = require('../models');
+var sessionLogic = require('../../session/logic');
 
 
 module.exports = function(request, reply) {
@@ -33,10 +34,23 @@ module.exports = function(request, reply) {
                             ' due to password error on save.');
                 account.remove();
             }
+            else {
+                // Initialize the session and return the jwt token
+                sessionLogic.login(account, function(err, token) {
+                    if (err) {
+                        reply(Boom.badImplementation(err));
+                        return;
+                    }
 
-            reply({
-                accountId: account._id
-            });
+                    // This is the success condition! We've created an account,
+                    // a password, a session, and a jwt token.
+                    reply({
+                        accountId: account._id,
+                        token: token
+                    });
+
+                }); // sessionLogic.login
+            }
         }); // password.save()
     }); // account.save()
 
