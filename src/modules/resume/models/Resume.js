@@ -1,6 +1,7 @@
 'use strict';
-
+var moment = require('moment');
 var mongoose = require('mongoose');
+
 
 /**
  * Resume
@@ -20,11 +21,7 @@ var schema = new mongoose.Schema({
         index: true
     },
     summary: {
-        type: String,
-        required: true,
-        index: {
-            unique: true
-        }
+        type: String
     },
     work: [new mongoose.Schema({
         name: {
@@ -79,6 +76,12 @@ var schema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
+});
+
+schema.pre('save', function(next) {
+    // update the updated field
+    this.updated = moment().toDate();
+    next();
 });
 
 schema.statics.findByAccountId = function(accountId, callback) {
