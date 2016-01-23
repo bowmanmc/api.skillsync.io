@@ -5,7 +5,7 @@ var validators = require('./validators');
 
 
 module.exports = [{
-    path: '/account',
+    path: '/api/account',
     method: 'POST',
     handler: handlers.register,
     config: {
@@ -15,7 +15,7 @@ module.exports = [{
         }
     }
 }, {
-    path: '/account/{accountId}',
+    path: '/api/account/{accountId}',
     method: 'PATCH',
     handler: handlers.update,
     config: {
@@ -25,14 +25,14 @@ module.exports = [{
         }
     }
 }, {
-    path: '/account/{accountId}',
+    path: '/api/account/{accountId}',
     method: 'GET',
     handler: handlers.lookup,
     config: {
         auth: 'jwt' // get account details
     }
 }, {
-    path: '/account/authenticate',
+    path: '/api/account/authenticate',
     method: 'POST',
     handler: handlers.authenticate,
     config: {
@@ -42,7 +42,7 @@ module.exports = [{
         }
     }
 }, {
-    path: '/account/registered',
+    path: '/api/account/registered',
     method: 'POST',
     handler: handlers.registered,
     config: {

@@ -5,7 +5,7 @@ var validators = require('./validators');
 
 
 module.exports = [{
-    path: '/resume',
+    path: '/api/resume',
     method: 'POST',
     handler: handlers.create,
     config: {
@@ -15,7 +15,7 @@ module.exports = [{
         }
     }
 }, {
-    path: '/resume/{accountId}',
+    path: '/api/resume/{accountId}',
     method: 'PATCH',
     handler: handlers.update,
     config: {
@@ -25,7 +25,7 @@ module.exports = [{
         }
     }
 }, {
-    path: '/resume/{accountId}',
+    path: '/api/resume/{accountId}',
     method: 'GET',
     handler: handlers.lookup,
     config: {
