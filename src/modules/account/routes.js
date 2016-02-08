@@ -51,4 +51,15 @@ module.exports = [{
             payload: validators.registered
         }
     }
+}, {
+    path: '/api/account/signout',
+    method: 'POST',
+    handler: handlers.signout,
+    config: {
+        // should we require auth to sign out?
+        auth: false,
+        validate: {
+            payload: validators.signout
+        }
+    }
 }];

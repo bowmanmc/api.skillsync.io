@@ -20,6 +20,10 @@ module.exports = {
         password: Joi.string().required()
     },
 
+    signout: {
+        account: Joi.string().required()
+    },
+
     update: {
         name: Joi.string(),
         email: Joi.string().email()
