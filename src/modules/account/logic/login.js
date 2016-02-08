@@ -11,18 +11,24 @@ const models = require('../models');
 
 
 module.exports = function(account, callback) {
-    // create Session object and generate JWT Token
-    var session = new models.Session({
-        accountId: account._id,
-        expirationDate: moment().add(90, 'days').toDate()
-    });
+    // Invalidate any old sessions
+    models.Session.remove({
+        accountId: account._id
+    }, function() {
 
-    session.save(function() {
-        var data = {
-            id: session._id,
-            accountId: account._id
-        };
-        var token = jwt.sign(data, config.JWT_SECRET);
-        callback(null, token);
+        // create Session object and generate JWT Token
+        var session = new models.Session({
+            accountId: account._id,
+            expirationDate: moment().add(90, 'days').toDate()
+        });
+
+        session.save(function() {
+            var data = {
+                id: session._id,
+                accountId: account._id
+            };
+            var token = jwt.sign(data, config.JWT_SECRET);
+            callback(null, token);
+        });
     });
 };
