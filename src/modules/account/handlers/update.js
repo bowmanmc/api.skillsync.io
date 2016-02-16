@@ -35,7 +35,11 @@ module.exports = function(request, reply) {
 
         // Ok, we have a valid account. Update it
         logic.updateAccount(account, request.payload);
-        account.save(function() {
+        account.save(function(err) {
+            if (err) {
+                reply(Boom.badImplementation(err.message));
+                return;
+            }
             reply(accountId).code(200);
         });
     });

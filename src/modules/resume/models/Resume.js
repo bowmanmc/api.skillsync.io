@@ -39,6 +39,9 @@ var schema = new mongoose.Schema({
             type: Date,
             default: null
         },
+        summary: {
+            type: String
+        },
         skillsUsed: {
             type: Array,
             default: []
