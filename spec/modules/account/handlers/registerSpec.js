@@ -3,6 +3,7 @@
 var src = '../../../../src/modules/account';
 var handlers = require(src + '/handlers');
 var models = require(src + '/models');
+var Resume = require(src + '../resume/models/Resume');
 
 var accountFixture = require('../models/accountFixture');
 
@@ -21,6 +22,11 @@ describe('account.handlers.register', function() {
                 console.log('Error dropping collection!', err);
             }
         });
+        Resume.remove({}, function(err) {
+            if (err) {
+                console.log('Error dropping collection!', err);
+            }
+        });
     });
 
     afterEach(function() {
@@ -31,6 +37,11 @@ describe('account.handlers.register', function() {
             }
         });
         models.Password.remove({}, function(err) {
+            if (err) {
+                console.log('Error dropping collection!', err);
+            }
+        });
+        Resume.remove({}, function(err) {
             if (err) {
                 console.log('Error dropping collection!', err);
             }

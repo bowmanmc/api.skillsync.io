@@ -9,6 +9,8 @@ var Boom = require('boom');
 var logic = require('../logic');
 var models = require('../models');
 
+var Resume = require('../../resume/models/Resume');
+
 
 module.exports = function(request, reply) {
 
@@ -42,12 +44,18 @@ module.exports = function(request, reply) {
                         return;
                     }
 
-                    // This is the success condition! We've created an account,
-                    // a password, a session, and a jwt token.
-                    reply({
-                        accountId: account._id,
-                        token: token
+                    var r = new Resume({
+                        accountId: account._id
                     });
+                    r.save(function() {
+
+                        // This is the success condition! We've created an account,
+                        // a password, a resume, a session, and a jwt token.
+                        reply({
+                            accountId: account._id,
+                            token: token
+                        });
+                    }); // resume.save
 
                 }); // sessionLogic.login
             }
