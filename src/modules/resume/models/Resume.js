@@ -23,6 +23,33 @@ var schema = new mongoose.Schema({
     summary: {
         type: String
     },
+    projects: [new mongoose.Schema({
+        name: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String
+        },
+        repo: {
+            type: String
+        },
+        startDate: {
+            type: Date,
+            required: true
+        },
+        endDate: {
+            type: Date,
+            default: null
+        },
+        summary: {
+            type: String
+        },
+        skillsUsed: {
+            type: Array,
+            default: []
+        }
+    })],
     work: [new mongoose.Schema({
         name: {
             type: String,

@@ -66,6 +66,7 @@ describe('resume.models.Resume', function() {
         testResume.save(function() {
             expect(testResume._id).not.toBe(null);
             expect(testResume.education.length).toBe(0);
+            expect(testResume.projects.length).toBe(0);
             expect(testResume.work.length).toBe(0);
             done();
         });
