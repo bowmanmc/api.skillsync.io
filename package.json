@@ -8,7 +8,7 @@
     "dist": "npm run clean && gulp dist",
     "server": "nodemon src/server.js --watch src",
     "start": "parallelshell \"npm run server\" \"npm run watch\"",
-    "test": "jasmine",
+    "test": "jasmine-node --forceexit spec",
     "watch": "nodemon -w src -w spec -x \"npm run test\""
   },
   "dependencies": {
@@ -22,7 +22,7 @@
     "jsonwebtoken": "^5.5.4",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
-    "mongoose": "^4.3.1",
+    "mongoose": "^4.4.6",
     "nodemailer": "^1.10.0",
     "nodemailer-ses-transport": "^1.3.0"
   },
@@ -30,7 +30,6 @@
     "del": "^2.2.0",
     "gulp": "^3.9.0",
     "gulp-zip": "^3.0.2",
-    "jasmine": "^2.4.1",
     "jasmine-node": "^1.14.5",
     "mockgoose": "^5.0.10",
     "moment": "^2.10.6",

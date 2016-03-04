@@ -12,4 +12,3 @@ describe('Test Scaffolding', function() {
     });
 
 });
-

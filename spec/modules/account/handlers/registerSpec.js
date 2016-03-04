@@ -1,9 +1,9 @@
 'use strict';
 
-var src = '../../../../src/modules/account';
-var handlers = require(src + '/handlers');
-var models = require(src + '/models');
-var Resume = require(src + '../resume/models/Resume');
+var src = '../../../../src/modules';
+var handlers = require(src + '/account/handlers');
+var models = require(src + '/account/models');
+var Resume = require(src + '/resume/models/Resume');
 
 var accountFixture = require('../models/accountFixture');
 
